@@ -3,9 +3,14 @@ import ReactDOM from "react-dom/client"
 
 import "bootstrap/dist/css/bootstrap.min.css"
 
-import App from "./App"
+import App from "./components/App"
+import Background from "./components/Background"
 
-const root = ReactDOM.createRoot(document.getElementById("root"))
-root.render(
-    <App />
-)
+const roots = {
+    "background": <Background />,
+    "app": <App />
+}
+
+for(const root in roots) {
+    ReactDOM.createRoot(document.getElementById(root)).render(roots[root])
+}

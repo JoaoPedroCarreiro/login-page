@@ -1,0 +1,12 @@
+body {
+    min-height: 100vh;
+    background: radial-gradient(ellipse at bottom, #1a1f25 0%, #070708 100%);
+}
+
+#app {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
