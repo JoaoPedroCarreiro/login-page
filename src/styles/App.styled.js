@@ -1,17 +1,15 @@
 import styled from "styled-components"
 
-const StyledApp = styled.section`
-    width: 500px;
-    height: 650px;
+const StyledApp = styled.div`
+    width: 550px;
+    height: 700px;
     background-color: white;
 
     z-index: 1;
 
-    .welcome {
-        width: 100%;
-        height: 55%;
-        background-color: darkblue;
-    }
+    margin: 0 20px;
+
+    box-shadow: 0px 4px 14px 5px rgba(0, 0, 0, .35);
 `
 
 export default StyledApp

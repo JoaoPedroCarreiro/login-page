@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200;300&display=swap');
+
 body {
     min-height: 100vh;
     background: radial-gradient(ellipse at bottom, #1a1f25 0%, #070708 100%);
@@ -5,8 +7,11 @@ body {
 
 #app {
     min-height: 100vh;
-
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Raleway", sans-serif;
 }
