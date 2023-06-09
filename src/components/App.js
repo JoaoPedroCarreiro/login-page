@@ -1,7 +1,7 @@
 import StyledApp from "../styles/App.styled"
 import StyledWelcome from "../styles/Welcome.styled"
 
-import SignUp from "./SignUp"
+import Enter from "./Enter"
 
 function App() {
     return (
@@ -12,7 +12,7 @@ function App() {
                     <p>Here is where your dreams become true</p>
                 </div>
             </StyledWelcome>
-            <SignUp />
+            <Enter />
         </StyledApp>
     )
 }
