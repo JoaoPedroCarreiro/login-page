@@ -1,4 +1,4 @@
-import welcome from "../assets/welcome.jpg"
+import welcome from "../assets/welcome.webp"
 import styled from "styled-components"
 
 const StyledWelcome = styled.div`

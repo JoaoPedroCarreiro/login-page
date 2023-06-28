@@ -6,14 +6,29 @@ const StyledEnter = styled.div`
     min-width: 100%;
     height: 45%;
 
+    overflow: hidden;
+
     .arrows {
+        width: 100%;
+        position: absolute;
         display: flex;
         justify-content: space-between;
+
+        z-index: 1;
     }
 
     i {
         font-size: 24px;
         color: #1a1f25;
+    }
+
+    .sections {
+        position: relative;
+
+        min-width: ${props => props.sectionsLength * 100}%;
+        height: 100%;
+
+        transition: left 0.5s ease-in-out;
     }
 `
 

@@ -1,12 +1,50 @@
+import { useEffect, useState } from "react"
+
 import StyledEnter from "../styles/Enter.styled"
 
+import EnterSection from "./EnterSection"
+
 function Enter() {
+    const [state, setState] = useState({
+        curSection: 0,
+        sectionsLength: 0
+    })
+
+    useEffect(() => {
+        setState(state => ({...state, sectionsLength: document.querySelector(".sections").childNodes.length}))
+    }, [])
+
+    useEffect(() => {
+        document.querySelector(".sections").style.left = `${-state.curSection * 550}px`
+    }, [state.curSection])
+
     return (
-        <StyledEnter>
+        <StyledEnter sectionsLength={state.sectionsLength}>
             <div className="arrows">
-                <button><i className="bi bi-arrow-left-short"></i></button>
-                <button><i className="bi bi-arrow-right-short"></i></button>
+                <button
+                    id="left-arrow"
+                    aria-label="Left Arrow"
+                    onClick={() => setState(state => ({...state, curSection: state.curSection - 1}))}
+                    disabled={(state.curSection === 0) ? true : false}
+                ><i className="bi bi-arrow-left-short"></i></button>
+                <button
+                    id="right-arrow"
+                    aria-label="Right Arrow"
+                    onClick={() => setState(state => ({...state, curSection: state.curSection + 1}))}
+                    disabled={(state.curSection === state.sectionsLength - 1) ? true : false}
+                ><i className="bi bi-arrow-right-short"></i></button>
             </div>
+            <form action="/" className="sections">
+                <EnterSection>
+                    aaaa
+                </EnterSection>
+                <EnterSection>
+                    bbbbb
+                </EnterSection>
+                <EnterSection>
+                    ccccc
+                </EnterSection>
+            </form>
         </StyledEnter>
     )
 }

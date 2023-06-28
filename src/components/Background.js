@@ -13,7 +13,7 @@ function Background() {
 
     return (
         <Particles init={init} options={{
-            fpsLimit: 120,
+            fpsLimit: 24,
             particles: {
                 groups: {
                     small: {
