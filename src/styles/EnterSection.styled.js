@@ -6,6 +6,17 @@ const StyledEnterSection = styled.div`
     padding-top: 24px;
 
     display: inline-block;
+
+    .enter-section-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    input {
+        width: 250px;
+    }
 `
 
 export default StyledEnterSection

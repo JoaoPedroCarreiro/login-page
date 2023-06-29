@@ -34,14 +34,17 @@ function Enter() {
                     disabled={(state.curSection === state.sectionsLength - 1) ? true : false}
                 ><i className="bi bi-arrow-right-short"></i></button>
             </div>
-            <form action="/" className="sections">
-                <EnterSection>
-                    aaaa
+            <form action="/" className="sections" autocomplete="off">
+                <EnterSection type="login">
+                    <div className="floating">
+                        <input type="email" id="email" maxLength={256} placeholder="Email" />
+                        <label htmlFor="email">Email</label>
+                    </div>
                 </EnterSection>
-                <EnterSection>
+                <EnterSection type="login">
                     bbbbb
                 </EnterSection>
-                <EnterSection>
+                <EnterSection type="login">
                     ccccc
                 </EnterSection>
             </form>
