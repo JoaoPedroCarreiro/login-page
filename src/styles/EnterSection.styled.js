@@ -12,10 +12,11 @@ const StyledEnterSection = styled.div`
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        gap: 40px;
     }
 
     input {
-        width: 250px;
+        width: 350px;
     }
 `
 
