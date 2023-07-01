@@ -15,8 +15,26 @@ const StyledEnterSection = styled.div`
         gap: 40px;
     }
 
-    input {
-        width: 350px;
+    .googleLogin {
+        padding: 5px 10px;
+
+        display: flex;
+        gap: 20px;
+
+        border-radius: 3px;
+
+        color: white;
+        font-size: 16px;
+    
+        background-color: #1a1f25;
+        opacity: .9;
+
+        font-family: "Open Sans", sans-serif;
+    }
+
+    .forgot-pass {
+        font-family: "Open Sans", sans-serif;
+        opacity: .75;
     }
 `
 

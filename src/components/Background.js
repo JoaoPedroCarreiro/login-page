@@ -1,15 +1,15 @@
 import { useCallback } from "react"
 
-import Particles from "react-tsparticles"
-
 import { loadFull } from "tsparticles"
+
+import Particles from "react-tsparticles"
 
 function Background() {
     const init = useCallback(async engine => {
         await loadFull(engine)
     }, [])
 
-    const amountOfParticles = 300
+    const amountOfParticles = 250
 
     return (
         <Particles init={init} options={{

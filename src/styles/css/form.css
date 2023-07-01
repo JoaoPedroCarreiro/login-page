@@ -15,8 +15,7 @@
     line-height: 1.5;
 
     border-bottom: 1px solid transparent;
-    border-image: linear-gradient(45deg, rgb(44, 63, 116) 0%, rgb(0, 7, 32) 100%);
-    border-image-slice: 1;
+    border-image: linear-gradient(45deg, rgb(44, 63, 116) 0%, rgb(0, 7, 32) 100%) 1;
 
     text-indent: 0.25rem;
 }

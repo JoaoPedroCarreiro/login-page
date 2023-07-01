@@ -1,43 +1,78 @@
-import { memo } from "react"
+import { memo, forwardRef, useRef, useImperativeHandle } from "react"
 import { useGoogleLogin } from '@react-oauth/google'
 
 import StyledEnterSection from "../styles/EnterSection.styled"
 import Input from "./Input"
 
-function EnterSection({section, type}) {
+const EnterSection = forwardRef(({children, section, type}, ref) => {
+    const passRef = useRef(0)
+    const confirmRef = useRef(0)
+    
+    useImperativeHandle(ref, () => {
+        return {
+            isPassAndConfirmPassEqual() {
+                return passRef.current.value === confirmRef.current.value
+            }
+        }
+    }, [])
+
     const googleLogin = useGoogleLogin({
         onSuccess: () => console.log("success"),
         onError: () => console.log("fail")
     })
-
-    const extras = {
+    
+    const templates = {
         "login": {
             "email":
-                <button type="button" className="googleLogin" onClick={googleLogin}>
-                    <span className="bi bi-google"></span><span>Sign in with Google</span>
-                </button>,
+                <>
+                    <Input id="email-login" type="email" name="Email" invalidMessage="Please enter a valid email" />
+                    <button id="button-login" aria-label="button-login" type="button" className="googleLogin" onClick={googleLogin}>
+                        <span className="bi bi-google"></span><span>Sign in with Google</span>
+                    </button>
+                </>,
             "password":
-                <button type="button" className="forgot-pass">
-                    Forgot your password?
-                </button>
+                <>
+                    <Input id="pass-login" type="password" name="Password" />
+                    <button id="button-forgot-pass" aria-label="button-forgot-pass" type="button" className="forgot-pass">
+                        Forgot your password?
+                    </button>
+                </>
         },
         "signup": {
-            "email": <Input id="username-signup" type="text" name="Username" />,
-            "password": <Input id="confirm-password" type="password" name="Confirm password" />
+            "email": 
+                <>
+                    <Input id="email-signup" type="email" name="Email" invalidMessage="Please enter a valid email" />
+                    <Input
+                        id="username-signup" type="text" name="Username"
+                        pattern="(?=.*[^\{\}~\|\u00b4\u0060¨])[a-zA-Z0-9_-áàâãéèêíïóôõöúûçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+"
+                        invalidMessage="Username cannot contains special characters except by _-"
+                    />
+                </>,
+            "password": 
+                <>
+                    <Input
+                        id="pass-signup" type="password" name="Password"
+                        pattern="([a-zA-Z])(?=.*[0-9]).{8,35}" ref={passRef}
+                        invalidMessage="Password must contain letters, numbers and 8-35 characters" />
+                    <Input type="password" name="Confirm password" ref={confirmRef} />
+                </>
         }
     }
 
     return (
-        <StyledEnterSection>
-            <div className="enter-section-content">
-                <h2>{section.toUpperCase()}</h2>
-                <div className="floating">
-                    <Input id={type + "-" + section} type={type} name={type.charAt(0).toUpperCase() + type.slice(1)} />
-                </div>
-                {extras[section][type]}
-            </div>
+        <StyledEnterSection className="enter-section">
+            {
+                (section && !children) ?
+                    <div className="enter-section-content">
+                        <h2>{section.toUpperCase()}</h2>
+                        {templates[section][type]}
+                    </div>
+                :
+                    children
+            }
+            
         </StyledEnterSection>
     )
-}
+})
 
 export default memo(EnterSection)
