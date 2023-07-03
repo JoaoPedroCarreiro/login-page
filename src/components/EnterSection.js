@@ -1,4 +1,4 @@
-import { memo, forwardRef, useRef, useImperativeHandle } from "react"
+import { memo, forwardRef, useRef, useImperativeHandle, useEffect } from "react"
 import { useGoogleLogin } from '@react-oauth/google'
 
 import StyledEnterSection from "../styles/EnterSection.styled"
@@ -7,11 +7,18 @@ import Input from "./Input"
 const EnterSection = forwardRef(({children, section, type}, ref) => {
     const passRef = useRef(0)
     const confirmRef = useRef(0)
+
+    const selfRef = useRef(0)
+
+    useEffect(() => {
+        if(!section) return
+        selfRef.current.setAttribute("section", section)
+    }, [section])
     
     useImperativeHandle(ref, () => {
         return {
-            isPassAndConfirmPassEqual() {
-                return passRef.current.value === confirmRef.current.value
+            checkPassMatch() {
+                return confirmRef.current.setCustomValidity(passRef.current.value === confirmRef.current.value ? "" : "Passwords mismatch")
             }
         }
     }, [])
@@ -52,15 +59,15 @@ const EnterSection = forwardRef(({children, section, type}, ref) => {
                 <>
                     <Input
                         id="pass-signup" type="password" name="Password"
-                        pattern="([a-zA-Z])(?=.*[0-9]).{8,35}" ref={passRef}
+                        pattern="(?=.*[a-zA-Z])(?=.*[0-9]).{8,35}" ref={passRef}
                         invalidMessage="Password must contain letters, numbers and 8-35 characters" />
-                    <Input type="password" name="Confirm password" ref={confirmRef} />
+                    <Input id="confirm-signup" type="password" name="Confirm password" ref={confirmRef} invalidMessage="Passwords must match" />
                 </>
         }
     }
 
     return (
-        <StyledEnterSection className="enter-section">
+        <StyledEnterSection ref={selfRef} className="enter-section">
             {
                 (section && !children) ?
                     <div className="enter-section-content">

@@ -3,10 +3,19 @@ import { useState, forwardRef, useRef, useEffect } from "react"
 import StyledInput from "../styles/Input.styled"
 
 const Input = forwardRef(({id, type, name, pattern, invalidMessage}, ref) => {
-    const inputRef = useRef(0)
-    
     const [value, setValue] = useState(0)
     const [passwordView, setPasswordView] = useState(false)
+
+    const selfRef = useRef(0)
+
+    useEffect(() => {
+        const enableRequired = (event) => {
+            event.currentTarget.toggleAttribute("required")
+            selfRef.current.querySelector(`#${id}`).removeEventListener("input", enableRequired)
+        }
+
+        selfRef.current.querySelector(`#${id}`).addEventListener("input", enableRequired)
+    }, [id])
 
     const viewButton = 
         <button id={`view-pass-${id}`} aria-label={`view-pass-${id}`} className="viewPass" type="button" onClick={() => setPasswordView(!passwordView)}>
@@ -14,7 +23,7 @@ const Input = forwardRef(({id, type, name, pattern, invalidMessage}, ref) => {
         </button>
 
     return (
-        <StyledInput className="floating">
+        <StyledInput ref={selfRef} id={`floating-${id}`} className="floating">
             <input
                 name={id}
                 id={id}
@@ -23,10 +32,9 @@ const Input = forwardRef(({id, type, name, pattern, invalidMessage}, ref) => {
                 type={(type === "password") ? (passwordView ? "text" : "password") : type}
                 maxLength={48}
                 placeholder={name}
-                ref={ref && inputRef}
-                onChange={(element) => setValue(element.target.value)}
+                ref={ref}
+                onChange={(event) => setValue(event.currentTarget.value)}
                 onInvalid={(event) => event.preventDefault()}
-                // required
             />
             <label htmlFor={id}>{name}</label>
             <span className="invalid-message">{(value) ? invalidMessage : "Field cannot be empty"}</span>

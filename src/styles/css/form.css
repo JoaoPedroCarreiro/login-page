@@ -46,3 +46,13 @@
     font-size: .8rem;
     transform: translateY(-1.2rem);
 }
+
+.use-invalid-animation {
+    animation: invalid-animation .6s ease;
+}
+
+@keyframes invalid-animation {
+    25% {transform: translateX(6px)}
+    50% {transform: translateX(-6px)}
+    75% {transform: translateX(5px)}
+}

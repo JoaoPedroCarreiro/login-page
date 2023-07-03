@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 
 import StyledEnter from "../styles/Enter.styled"
 
@@ -15,11 +15,32 @@ function Enter() {
     const leftArrowRef = useRef(0)
     const rightArrowRef = useRef(0)
 
-    const passwordRef = useRef(0)
+    const passRef = useRef(0)
 
     useEffect(() => {
         setState(state => ({...state, sectionsLength: sectionsRef.current.querySelectorAll(".enter-section").length}))
     }, [])
+
+    const keyPressHandler = useCallback((event) => {
+        const arrows = {
+            "login": leftArrowRef,
+            "signup": rightArrowRef
+        }
+
+        if(event.key === "Enter") {
+            try {
+                event.preventDefault()
+                arrows[sectionsRef.current.querySelectorAll(".enter-section").item(state.curSection).getAttribute("section")].current.click()
+            } catch (error) {}
+        }
+    }, [state.curSection])
+
+    useEffect(() => {
+        window.addEventListener("keypress", keyPressHandler)
+        return () => {
+            window.removeEventListener("keypress", keyPressHandler)
+        }
+    }, [keyPressHandler])
 
     const moveOrSubmit = (direction) => {
         const directions = {
@@ -46,8 +67,75 @@ function Enter() {
             })()
     }
 
-    const onInvalid = (event) => {
-        console.log(event.target)
+    const onSubmitLogIn = (event) => {
+        let error = false
+
+        const inputs = {
+            email: event.currentTarget["email-login"],
+            password: event.currentTarget["pass-login"]
+        }
+        
+        for(const key in inputs) {
+            const input = inputs[key]
+
+            if(!input.value) {
+                input.toggleAttribute("required")
+                event.currentTarget.checkValidity()
+                error = true
+            }
+        }
+
+        if(!error) { // Here is where the code to send to server goes
+            window.location.reload()
+        }
+    }
+
+    const onSubmitSignUp = (event) => {
+        passRef.current.checkPassMatch()
+
+        let error = false
+
+        const inputs = {
+            email: event.currentTarget["email-signup"],
+            username: event.currentTarget["username-signup"],
+            password: event.currentTarget["pass-signup"],
+            confirm: event.currentTarget["confirm-signup"]
+        }
+        
+        for(const key in inputs) {
+            const input = inputs[key]
+
+            if(!input.value) {
+                input.toggleAttribute("required")
+                event.currentTarget.checkValidity()
+                error = true
+            }
+        }
+
+        if(!error) { // Here is where the code to send to server goes
+            window.location.reload()
+        }
+    }
+
+    const onInvalid = (event, formDirection) => {
+        passRef.current.checkPassMatch()
+
+        for(const section of sectionsRef.current.querySelectorAll(".enter-section").entries()) {
+            const index = section[0]
+            const item = section[1]
+           
+            const input = item.querySelector(`#floating-${event.target.id}`)
+            
+            if(input) {
+                input.classList.remove("use-invalid-animation")
+                setTimeout(() => {
+                    input.style.animationDelay = `${0.5 * ((formDirection === "right") ? (state.sectionsLength - 1) - index : index)}s`
+                    input.classList.add("use-invalid-animation")
+                }, 1)
+
+                setState(state => ({...state, curSection: index}))
+            }
+        }
     }
 
     return (
@@ -72,9 +160,8 @@ function Enter() {
             </div>
             <div className="sections" ref={sectionsRef} style={{left: -state.curSection * 550}}>
                 <form
-                    // onSubmit={(event) => event.preventDefault()}
-                    action="/"
-                    method="GET"
+                    onSubmit={(event) => {event.preventDefault(); onSubmitLogIn(event)}}
+                    onInvalid={(event) => onInvalid(event, "left")}
                     name="form-login"
                     id="form-login"
                     autoComplete="off"
@@ -82,20 +169,18 @@ function Enter() {
                     <EnterSection section="login" type="password" />
                     <EnterSection section="login" type="email" />
                 </form>
-                <EnterSection section="login" type="password">
+                <EnterSection>
                     <p>dsda</p>
                 </EnterSection>
                 <form
-                    // onSubmit={(event) => {}}
-                    onInvalid={(event) => onInvalid(event)}
-                    action="/"
-                    method="GET"
+                    onSubmit={(event) => {event.preventDefault(); onSubmitSignUp(event)}}
+                    onInvalid={(event) => onInvalid(event, "right")}
                     name="form-signup"
                     id="form-signup"
                     autoComplete="off"
                 >
                     <EnterSection section="signup" type="email" />
-                    <EnterSection section="signup" type="password" ref={passwordRef} />
+                    <EnterSection section="signup" type="password" ref={passRef} />
                 </form>
             </div>
         </StyledEnter>
