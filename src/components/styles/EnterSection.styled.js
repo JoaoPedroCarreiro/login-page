@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-const StyledEnterSection = styled.div`
+const StyledEnterSection = styled.section`
     width: var(--app-width);
     height: 100%;
     
@@ -31,19 +31,29 @@ const StyledEnterSection = styled.div`
         font-family: "Open Sans", sans-serif;
     }
 
-    .forgot-pass {
-        font-family: "Open Sans", sans-serif;
-        opacity: .75;
-    }
-
     @media only screen and (max-width: 480px) {
         h2 {
             font-size: 1.4rem;
         }
         
         .googleLogin,
-        .forgot-pass {
+        .sub-button {
             font-size: 12px;
+        }
+    }
+
+    @media only screen and (max-width: 360px) {
+        h2 {
+            font-size: 1.25rem;
+        }
+        
+        .enter-section-content {
+            gap: 30px;
+        }
+        
+        .googleLogin,
+        .sub-button {
+            font-size: 11px;
         }
     }
 `

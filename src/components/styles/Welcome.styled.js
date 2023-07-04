@@ -83,6 +83,20 @@ const Welcome = styled.div`
             font-size: .90rem;
         }
     }
+
+    @media only screen and (max-width: 360px) {
+        .welcome-content {
+            padding-top: 90px;
+        }
+        
+        h1 {
+            font-size: 1.2rem;
+        }
+
+        p {
+            font-size: .8rem;
+        }
+    }
 `
 
 export default Welcome

@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunklogin_page=self.webpackChunklogin_page||[]).push([[69],{69:function(n,a,p){p.r(a);var e,i=p(168),h=p(444).ZP.div(e||(e=(0,i.Z)(["\n    width: var(--app-width);\n    height: var(--app-height);\n    background-color: white;\n\n    z-index: 1;\n\n    margin: 0 20px;\n\n    box-shadow: 0px 4px 14px 5px rgba(0, 0, 0, .35);\n"])));a.default=h}}]);
+//# sourceMappingURL=69.2b2863d3.chunk.js.map

@@ -60,6 +60,21 @@ const StyledInput = styled.div`
             font-size: 10px;
         }
     }
+
+    @media only screen and (max-width: 360px) {
+        input {
+            width: 220px;
+            font-size: .75rem;
+        }
+
+        label {
+            font-size: .75rem;
+        }
+
+        .invalid-message {
+            font-size: 9px;
+        }
+    }
 `
 
 export default StyledInput

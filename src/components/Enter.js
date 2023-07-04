@@ -151,14 +151,19 @@ function Enter() {
                     ref={leftArrowRef}
                     onClick={() => moveOrSubmit("left")}
                 ><i className={`bi bi-${(state.curSection === 0) ? "check" : "arrow-left-short"}`}></i></button>
-                <button
-                    id="right-arrow"
-                    aria-label="Right Arrow"
-                    form="form-signup"
-                    type="button"
-                    ref={rightArrowRef}
-                    onClick={() => moveOrSubmit("right")}
-                ><i className={`bi bi-${(state.curSection === state.sectionsLength - 1) ? "check" : "arrow-right-short"}`}></i></button>
+                <div className="already-acc-parent">
+                    <label htmlFor="right-arrow" className="sub-button already-acc" hidden={(state.curSection === 1) ? false : true}>
+                        Already have an account
+                    </label>
+                    <button
+                        id="right-arrow"
+                        aria-label="Right Arrow"
+                        form="form-signup"
+                        type="button"
+                        ref={rightArrowRef}
+                        onClick={() => moveOrSubmit("right")}
+                    ><i className={`bi bi-${(state.curSection === state.sectionsLength - 1) ? "check" : "arrow-right-short"}`}></i></button>
+                </div>
             </div>
             <Sections ref={sectionsRef} sectionsLength={state.sectionsLength} curSection={state.curSection}>
                 <form
@@ -171,9 +176,6 @@ function Enter() {
                     <EnterSection section="login" type="password" />
                     <EnterSection section="login" type="email" />
                 </form>
-                <EnterSection>
-                    aaa
-                </EnterSection>
                 <form
                     onSubmit={(event) => {event.preventDefault(); onSubmitSignUp(event)}}
                     onInvalid={(event) => onInvalid(event, "right")}

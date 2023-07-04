@@ -24,8 +24,8 @@ const EnterSection = forwardRef(({children, section, type}, ref) => {
     }, [])
 
     const googleLogin = useGoogleLogin({
-        onSuccess: () => console.log("success"),
-        onError: () => console.log("fail")
+        onSuccess: () => { alert("Logging in with google"); window.location.reload() },
+        onError: () => { alert("Error when trying to log in with google"); window.location.reload() }
     })
     
     const templates = {
@@ -33,14 +33,14 @@ const EnterSection = forwardRef(({children, section, type}, ref) => {
             "email":
                 <>
                     <Input id="email-login" type="email" name="Email" invalidMessage="Please enter a valid email" />
-                    <button id="button-login" aria-label="button-login" type="button" className="googleLogin" onClick={googleLogin}>
+                    <button id="button-google-login" aria-label="button-google-login" type="button" className="googleLogin" onClick={googleLogin}>
                         <span className="bi bi-google"></span><span>Sign in with Google</span>
                     </button>
                 </>,
             "password":
                 <>
                     <Input id="pass-login" type="password" name="Password" />
-                    <button id="button-forgot-pass" aria-label="button-forgot-pass" type="button" className="forgot-pass">
+                    <button id="button-forgot-pass" aria-label="button-forgot-pass" type="button" className="sub-button">
                         Forgot your password?
                     </button>
                 </>
@@ -51,7 +51,7 @@ const EnterSection = forwardRef(({children, section, type}, ref) => {
                     <Input id="email-signup" type="email" name="Email" invalidMessage="Please enter a valid email" />
                     <Input
                         id="username-signup" type="text" name="Username"
-                        pattern="(?=.*[^\{\}~\|\u00b4\u0060¨])[a-zA-Z0-9_-áàâãéèêíïóôõöúûçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+"
+                        pattern="(?=.*[^\{\}~\|\u00b4\u0060¨])[a-zA-Z0-9_\-áàâãéèêíïóôõöúûçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+"
                         invalidMessage="Username cannot contains special characters except by _-"
                     />
                 </>,
