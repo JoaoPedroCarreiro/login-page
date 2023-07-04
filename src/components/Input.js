@@ -1,6 +1,6 @@
 import { useState, forwardRef, useRef, useEffect } from "react"
 
-import StyledInput from "../styles/Input.styled"
+import StyledInput from "./styles/Input.styled"
 
 const Input = forwardRef(({id, type, name, pattern, invalidMessage}, ref) => {
     const [value, setValue] = useState(0)

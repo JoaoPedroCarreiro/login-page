@@ -1,14 +1,16 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 
-import StyledEnter from "../styles/Enter.styled"
+import StyledEnter from "./styles/Enter.styled"
 
 import EnterSection from "./EnterSection"
+import Sections from "./styles/Sections.styled"
 
 function Enter() {
     const [state, setState] = useState({
         curSection: 1,
         sectionsLength: 0,
-        passwordView: false
+        passwordView: false,
+        style: {}
     })
 
     const sectionsRef = useRef(0)
@@ -18,7 +20,7 @@ function Enter() {
     const passRef = useRef(0)
 
     useEffect(() => {
-        setState(state => ({...state, sectionsLength: sectionsRef.current.querySelectorAll(".enter-section").length}))
+        setState(state => ({ ...state, sectionsLength:sectionsRef.current.querySelectorAll(".enter-section").length }))
     }, [])
 
     const keyPressHandler = useCallback((event) => {
@@ -139,7 +141,7 @@ function Enter() {
     }
 
     return (
-        <StyledEnter sectionsLength={state.sectionsLength}>
+        <StyledEnter>
             <div className="arrows">
                 <button
                     id="left-arrow"
@@ -158,7 +160,7 @@ function Enter() {
                     onClick={() => moveOrSubmit("right")}
                 ><i className={`bi bi-${(state.curSection === state.sectionsLength - 1) ? "check" : "arrow-right-short"}`}></i></button>
             </div>
-            <div className="sections" ref={sectionsRef} style={{left: -state.curSection * 550}}>
+            <Sections ref={sectionsRef} sectionsLength={state.sectionsLength} curSection={state.curSection}>
                 <form
                     onSubmit={(event) => {event.preventDefault(); onSubmitLogIn(event)}}
                     onInvalid={(event) => onInvalid(event, "left")}
@@ -170,7 +172,7 @@ function Enter() {
                     <EnterSection section="login" type="email" />
                 </form>
                 <EnterSection>
-                    <p>dsda</p>
+                    aaa
                 </EnterSection>
                 <form
                     onSubmit={(event) => {event.preventDefault(); onSubmitSignUp(event)}}
@@ -182,7 +184,7 @@ function Enter() {
                     <EnterSection section="signup" type="email" />
                     <EnterSection section="signup" type="password" ref={passRef} />
                 </form>
-            </div>
+            </Sections>
         </StyledEnter>
     )
 }

@@ -1,8 +1,8 @@
 import styled from "styled-components"
 
 const StyledApp = styled.div`
-    width: 550px;
-    height: 700px;
+    width: var(--app-width);
+    height: var(--app-height);
     background-color: white;
 
     z-index: 1;

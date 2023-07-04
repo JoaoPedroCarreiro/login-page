@@ -45,6 +45,21 @@ const StyledInput = styled.div`
 
         visibility: hidden;
     }
+
+    @media only screen and (max-width: 480px) {
+        input {
+            width: 240px;
+            font-size: .8rem;
+        }
+
+        label {
+            font-size: .8rem;
+        }
+
+        .invalid-message {
+            font-size: 10px;
+        }
+    }
 `
 
 export default StyledInput

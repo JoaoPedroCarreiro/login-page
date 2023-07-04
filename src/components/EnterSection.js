@@ -1,7 +1,7 @@
 import { memo, forwardRef, useRef, useImperativeHandle, useEffect } from "react"
 import { useGoogleLogin } from '@react-oauth/google'
 
-import StyledEnterSection from "../styles/EnterSection.styled"
+import StyledEnterSection from "./styles/EnterSection.styled"
 import Input from "./Input"
 
 const EnterSection = forwardRef(({children, section, type}, ref) => {
@@ -77,7 +77,6 @@ const EnterSection = forwardRef(({children, section, type}, ref) => {
                 :
                     children
             }
-            
         </StyledEnterSection>
     )
 })

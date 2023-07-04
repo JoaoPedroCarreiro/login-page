@@ -21,20 +21,6 @@ const StyledEnter = styled.div`
         font-size: 24px;
         color: #1a1f25;
     }
-
-    .sections {
-        position: relative;
-
-        min-width: ${props => props.sectionsLength * 100}%;
-        height: 100%;
-
-        transition: left 0.5s ease-in-out;
-    }
-
-    .sections > * {
-        height: 100%;
-        display: inline-block;
-    }
 `
 
 export default StyledEnter

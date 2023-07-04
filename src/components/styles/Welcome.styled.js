@@ -1,7 +1,7 @@
-import welcome from "../assets/welcome.webp"
+import welcome from "../../assets/welcome.webp"
 import styled from "styled-components"
 
-const StyledWelcome = styled.div`
+const Welcome = styled.div`
     position: relative;
 
     width: 100%;
@@ -47,6 +47,42 @@ const StyledWelcome = styled.div`
         font-weight: 200;
         font-size: 1.05rem;
     }
+
+    @media only screen and (max-width: 768px) {
+        background-position: center 63%;
+
+        h1 {
+            font-size: 1.6rem;
+        }
+
+        p {
+            font-size: 1rem;
+        }
+    }
+
+    @media only screen and (max-width: 576px) {
+        background-position: center bottom;
+
+        h1 {
+            font-size: 1.35rem;
+        }
+
+        p {
+            font-size: .90rem;
+        }
+    }
+
+    @media only screen and (max-width: 480px) {
+        background-position: center 40%;
+
+        h1 {
+            font-size: 1.35rem;
+        }
+
+        p {
+            font-size: .90rem;
+        }
+    }
 `
 
-export default StyledWelcome
+export default Welcome
