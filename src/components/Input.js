@@ -6,7 +6,7 @@ const Input = forwardRef(({id, type, name, pattern, invalidMessage}, ref) => {
     const [value, setValue] = useState(0)
     const [passwordView, setPasswordView] = useState(false)
 
-    const selfRef = useRef(0)
+    // const selfRef = useRef(0)
 
     useEffect(() => {
         const enableRequired = (event) => {
