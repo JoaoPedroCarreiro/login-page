@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200;300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
+
+:root {
+    --app-width: 550px;
+    --app-height: 700px;
+}
+
+body {
+    min-height: 100vh;
+    background: radial-gradient(ellipse at bottom, #1a1f25 0%, #070708 100%);
+}
+
+body[stop-transitions] * {
+    transition: none !important
+}
+
+#app {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Raleway", sans-serif;
+}
+
+i {
+    display: block;
+    line-height: 0;
+}
+
+label {
+    cursor: pointer;
+}
+
+button {
+    margin: 0;
+    padding: 0;
+
+    display: block;
+    border: none;
+    outline: none;
+    background: transparent;
+}
+
+button:disabled i {
+    color: grey;
+}
+
+.sub-button {
+    font-family: "Open Sans", sans-serif;
+    opacity: .75;
+}
+
+@media only screen and (max-height: 720px) {
+    :root {
+        --app-width: calc(0.95 * 550px);
+        --app-height: calc(0.85 * 700px);
+    }
+}
+
+@media only screen and (max-height: 640px) {
+    :root {
+        --app-width: calc(0.9 * 550px);
+        --app-height: calc(0.8 * 700px);
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    :root {
+        --app-width: calc(0.85 * 550px)
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    :root {
+        --app-width: calc(0.75 * 550px)
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    :root {
+        --app-width: calc(0.60 * 550px);
+        --app-height: calc(0.8 * 700px);
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    :root {
+        --app-width: calc(0.50 * 550px);
+        --app-height: calc(0.65 * 700px);
+    }
+}

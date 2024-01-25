@@ -1,0 +1,58 @@
+.floating {
+    position: relative;
+}
+
+.floating > input,
+.floating > input:focus {
+    padding: 0;
+    
+    box-shadow: none;
+    border: none;
+    outline: none;
+
+    height: auto;
+    min-height: auto;
+    line-height: 1.5;
+
+    border-bottom: 1px solid transparent;
+    border-image: linear-gradient(45deg, rgb(44, 63, 116) 0%, rgb(0, 7, 32) 100%) 1;
+
+    text-indent: 0.25rem;
+}
+
+.floating > input::placeholder {
+    color: transparent;
+}
+
+.floating > label {
+    padding: 0.15rem 0.25rem;
+    background-color: transparent;
+
+    position: absolute;
+    bottom: 1px;
+    left: 0;
+
+    border: none;
+
+    transition: all .2s ease-out;
+    opacity: .75;
+
+    cursor: text;
+    pointer-events: none;
+}
+
+.floating > input:not(:placeholder-shown) + label,
+.floating > input:focus + label {
+    font-size: .8rem;
+    transform: translateY(-1.2rem);
+}
+
+.use-invalid-animation {
+    animation: invalid-animation .6s ease;
+}
+
+@keyframes invalid-animation {
+    25% {transform: translateX(6px)}
+    50% {transform: translateX(-6px)}
+    75% {transform: translateX(5px)}
+}
