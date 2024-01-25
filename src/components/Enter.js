@@ -153,7 +153,7 @@ function Enter() {
                 ><i className={`bi bi-${(state.curSection === 0) ? "check" : "arrow-left-short"}`}></i></button>
                 <div className="already-acc-parent">
                     <label htmlFor="right-arrow" className="sub-button already-acc" hidden={(state.curSection === 1) ? false : true}>
-                        Already have an account
+                        Not have an account yet?
                     </label>
                     <button
                         id="right-arrow"
